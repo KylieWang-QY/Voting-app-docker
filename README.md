@@ -45,5 +45,16 @@ docker build . -t result-app
 docker run -p 5001:80 --link db:db result-app
 ```
 ## Notes
-- For step 4, should add `-e POSTGRES_HOST_AUTH_METHOD=trust` to allow all connections without a password. Although, this is not recommended. Please check [ref](https://stackoverflow.com/questions/63262613/docker-postgres-database-is-uninitialized-and-superuser-password-is-not-specif) for more information.
+- For step 4, should add `-e POSTGRES_HOST_AUTH_METHOD=trust` to allow all connections without a password. Although, this is not recommended. Another method to add `POSTGRES_USER` and `POSTGRES_PASSWORD` to the environment variable, I use this method in the docker-compose. Please check [ref](https://stackoverflow.com/questions/63262613/docker-postgres-database-is-uninitialized-and-superuser-password-is-not-specif) for more information.
 - For step 7, should add `--platform=linux/amd64` to the FROM line of the docker file to avoid error: "qemu-x86_64: Could not open '/lib64/ld-linux-x86-64.so.2': No such file or directory". Please check [ref](https://stackoverflow.com/questions/71040681/qemu-x86-64-could-not-open-lib64-ld-linux-x86-64-so-2-no-such-file-or-direc) for more information.
+
+## Deploying application - Docker-compose
+1. Check docker-compose version
+```
+docker-compose --version
+```
+2. Stop all the running containers
+3. Use docker-compose.yaml to deploy the application, and check [http://localhost:5000](http://localhost:5000) and [http://localhost:5001](http://localhost:5001), the voting application will run as expected. 
+```
+docker-compose up
+```
